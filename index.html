@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Rede Social de Carros</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Rede Social de Carros</h1>
+  </header>
+
+  <main>
+    <section id="post-form">
+      <textarea id="post-text" placeholder="Compartilhe algo sobre seu carro..."></textarea>
+      <button onclick="criarPost()">Publicar</button>
+    </section>
+
+    <section id="feed">
+      <!-- Os posts vão aparecer aqui -->
+    </section>
+  </main>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+  const socket = io("http://localhost:3000"); // depois vamos trocar pelo link do servidor online
+
+  const userId = prompt("Digite seu nome ou ID:");
+  socket.emit("join", userId);
+
+  function enviarMensagemPrivada(para, mensagem) {
+    socket.emit("chat message", {
+      from: userId,
+      to: para,
+      message: mensagem
+    });
+  }
+
+  socket.on("chat message", ({ from, message }) => {
+    alert(`Mensagem de ${from}: ${message}`);
+  });
+</script>
+</body>
+</html>
