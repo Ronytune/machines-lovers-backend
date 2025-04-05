@@ -23,7 +23,7 @@
 
   <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 <script>
-  const socket = io("http://localhost:3000"); // depois vamos trocar pelo link do servidor online
+  const socket = io("https://seu-link-do-backend.onrender.com");  // ou no Railway
 
   const userId = prompt("Digite seu nome ou ID:");
   socket.emit("join", userId);
